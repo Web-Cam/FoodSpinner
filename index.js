@@ -20,7 +20,11 @@ app.use(
 
 var yelpKey = process.env.yelpKey; //replace with your api key
 
-const client = yelp.client(yelpKey);
+console.log(typeof yelpKey, yelpKey);
+
+var client = yelp.client(yelpKey);
+
+console.log(client);
 
 app.post("/params", function(req, res) {
   var searchParams = {
