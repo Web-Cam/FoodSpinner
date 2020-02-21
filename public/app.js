@@ -14,6 +14,7 @@ $(function() {
     keydown: function(event) {
       if (event.which === 13) {
         returnData();
+        $(this).val("");
       }
     }
   });
@@ -29,9 +30,8 @@ $(function() {
       function(data, status) {
         console.log(data);
 
-        $("#resultName")
-          .text(data.name)
-          .before("<img src=''></img>");
+        $("#resultName").text(data.name);
+        //.before("<img src=''></img>");
 
         $("img")
           .attr("src", data.image_url)
