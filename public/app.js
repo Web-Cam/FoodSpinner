@@ -58,7 +58,8 @@ $(function() {
 function fixMapsUrl(maps) {
   if (maps.includes(" ")) {
     maps = maps.replace(" ", "%20");
-    console.log(maps);
     fixMapsUrl(maps);
+  } else if (maps.includes(" ") === false) {
+    console.log(maps);
   }
 }
