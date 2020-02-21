@@ -1,3 +1,0 @@
-yelpKey = Aj_FRzPYPrTmTFGpe_G3qjnFsk9zWyxZWfLxL0D-i3rpn0w8mIavc2jUvfLt8BmSQx3shM-CZatTjjyvUbwV9VbMnzMDduBP42MNuKjImm42FXPwMsme9c8Cb9NPXnYx
-googleKey = AIzaSyBbElVOA8RHZYiP-JPA3eSzIxbos9Je_YY
-web: node index.js
