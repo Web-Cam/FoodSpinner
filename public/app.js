@@ -4,6 +4,7 @@ $(function() {
   navigator.geolocation.getCurrentPosition(function(position) {
     lat = position.coords.latitude.toString();
     long = position.coords.longitude.toString();
+    console.log({ lat, long });
   });
 
   $("#searchSubmit").click(function() {
