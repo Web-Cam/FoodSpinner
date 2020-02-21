@@ -18,6 +18,8 @@ app.use(
   })
 );
 
+console.log(typeof process.env.yelpKey, process.env.yelpKey);
+
 var yelpKey = process.env.yelpKey; //replace with your api key
 
 const client = yelp.client(yelpKey);

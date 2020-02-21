@@ -48,6 +48,8 @@ $(function() {
           "&key=" +
           googleKey;
 
+        console.log(typeof maps, maps);
+
         fixMapsUrl(maps);
 
         $("#resultAddr1").text(data.location.display_address[0]);
