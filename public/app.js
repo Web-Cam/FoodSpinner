@@ -4,7 +4,7 @@ $(function() {
   navigator.geolocation.getCurrentPosition(function(position) {
     lat = position.coords.latitude.toString();
     long = position.coords.longitude.toString();
-    console.log({ lat, long });
+    console.log(lat, long, "----HERE----");
   });
 
   $("#searchSubmit").click(function() {
@@ -32,7 +32,6 @@ $(function() {
         console.log(data);
 
         $("#resultName").text(data.name);
-        //.before("<img src=''></img>");
 
         $("img")
           .attr("src", data.image_url)
