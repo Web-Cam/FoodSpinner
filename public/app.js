@@ -38,7 +38,7 @@ $(function() {
           .attr("height", "20%")
           .attr("width", "20%");
 
-        googleKey = ENV["googleKey"]; //replace with your api key
+        googleKey = process.env.googleKey; //replace with your api key
 
         var maps =
           "https://www.google.com/maps/embed/v1/place?q=" +
