@@ -9,6 +9,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "yelp-fusion": "^2.0.2"
+    "express": "^4.17.1",
+    "jquery": "^3.4.1",
+    "yelp-fusion": "^2.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }
