@@ -37,12 +37,16 @@ $(function() {
           .attr("src", data.image_url)
           .attr("height", "20%")
           .attr("width", "20%");
+
+        googleKey = "place googlemaps key here";
+
         var maps =
           "https://www.google.com/maps/embed/v1/place?q=" +
           data.name +
           "%20" +
           data.location.address1 +
-          "&key=AIzaSyBmthcG1tNcvBKdciYrTdUJYe7jcksjM9g";
+          "&key=" +
+          googleKey;
 
         fixMapsUrl(maps);
 

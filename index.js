@@ -18,9 +18,9 @@ app.use(
   })
 );
 
-const client = yelp.client(
-  "1Tqf6RIYHXMtrF_MNnDQ6V4PIgZrIsdK_kJs9XO0A9jCd2JBRli1Dkv6f2vvOCpfRMj-FDvXnI-yGChvbTjQSAe55iRbHyj7CCTZG8FzobUogEU7K8rSAe6rpJZNXnYx"
-);
+yelpKey = "insert yelp key";
+
+const client = yelp.client(yelpKey);
 
 app.post("/params", function(req, res) {
   var searchParams = {
