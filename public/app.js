@@ -37,10 +37,28 @@ $(function() {
           .attr("src", data.image_url)
           .attr("height", "20%")
           .attr("width", "20%");
+        var maps =
+          "https://www.google.com/maps/embed/v1/place?q=" +
+          data.name +
+          "%20" +
+          data.location.address1 +
+          "&key=AIzaSyCYdBaTQAKLkabirqjqBUCmpnNccbXVMYw";
+
+        fixMapsUrl(maps);
 
         $("#resultAddr1").text(data.location.display_address[0]);
         $("#resultAddr2").text(data.location.display_address[1]);
+
+        $("#maps").attr("src", maps);
       }
     );
   }
 });
+
+function fixMapsUrl(maps) {
+  if (maps.includes(" ")) {
+    maps = maps.replace(" ", "%20");
+    console.log(maps);
+    fixMapsUrl(maps);
+  }
+}
