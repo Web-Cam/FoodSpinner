@@ -18,7 +18,11 @@ app.use(
   })
 );
 
-var keys = require("./public/keys.json") || "none";
+if (process.env.local != false) {
+  var keys = require("./public/keys.json");
+}
+
+console.log(typeof process.env.local, process.env.local);
 
 var yelpKey = process.env.yelpKey || keys.yelpKey; //replace with your api key
 var googleKey = process.env.googleKey || keys.googleKey;
