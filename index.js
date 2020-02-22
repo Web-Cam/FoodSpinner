@@ -18,9 +18,9 @@ app.use(
   })
 );
 
-if (process.env.local != false) {
+/* if (process.env.local != false) {
   var keys = require("./public/keys.json");
-}
+} */
 
 console.log(typeof process.env.local, process.env.local);
 
