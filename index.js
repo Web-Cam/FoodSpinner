@@ -10,7 +10,7 @@ app.listen(PORT, function() {
 });
 
 app.use(express.static("public"));
-app.use(bodyParser.json());
+app.use(bodyParser.json("keys.json"));
 
 app.use(
   bodyParser.urlencoded({
@@ -18,11 +18,17 @@ app.use(
   })
 );
 
-yelpKey = ENV["yelpKey"]; //replace with your api key
+if (process.env.local) {
+} else {
+  var keys = require("./public/keys.json");
+}
 
-const client = yelp.client(yelpKey);
+var yelpKey = process.env.yelpKey || keys.yelpKey; //replace with your api key
+var googleKey = process.env.googleKey || keys.googleKey;
 
-app.post("/params", function(req, res) {
+var client = yelp.client(yelpKey);
+
+app.post("/yelp", function(req, res) {
   var searchParams = {
     term: "",
     latitude: "",
@@ -39,4 +45,11 @@ app.post("/params", function(req, res) {
     .catch(e => {
       console.log(e);
     });
+});
+
+app.post("/google", function(req, res) {
+  var key = {
+    key: googleKey
+  };
+  res.send(key);
 });

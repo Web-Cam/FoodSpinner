@@ -1,59 +1,90 @@
 $(function() {
-  var lat;
-  var long;
-  navigator.geolocation.getCurrentPosition(function(position) {
-    lat = position.coords.latitude.toString();
-    long = position.coords.longitude.toString();
-  });
+  navigator.geolocation.getCurrentPosition(getCoords);
 
-  $("#searchSubmit").click(function() {
-    returnData();
-  });
+  function getCoords(location) {
+    var lat = location.coords.latitude.toString();
+    var long = location.coords.longitude.toString();
+    handleSubmit(lat, long);
+  }
 
-  $("#search").on({
-    keydown: function(event) {
-      if (event.which === 13) {
-        returnData();
-        $(this).val("");
+  function handleSubmit(lat, long) {
+    $("#searchSubmit").click(function() {
+      if ($("#search").val() != "") {
+        var term = $("#search").val();
+        $("#search").val("");
+
+        setYelpData(lat, long, term);
       }
-    }
-  });
+    });
 
-  function returnData() {
-    $.post(
-      "/params",
-      {
-        term: $("#search").val(),
-        latitude: lat,
-        longitude: long
+    $("#search").on({
+      keydown: function(event) {
+        if (event.which === 13 && $("#search").val() != "") {
+          var term = $("#search").val();
+          $("#search").val("");
+
+          setYelpData(lat, long, term);
+        }
       },
-      function(data, status) {
-        console.log(data);
 
-        $("#resultName").text(data.name);
-        //.before("<img src=''></img>");
+      keypress: function(event) {
+        if (event.which === 13 && $("#search").val() != "") {
+          var term = $("#search").val();
+          $("#search").val("");
 
-        $("img")
-          .attr("src", data.image_url)
-          .attr("height", "20%")
-          .attr("width", "20%");
+          setYelpData(lat, long, term);
+        }
+      }
+    });
+  }
 
-        googleKey = ENV["googleKey"]; //replace with your api key
+  function rerender(yelpData) {
+    $("#resultName").text(yelpData.name);
+
+    $("img")
+      .attr("src", yelpData.image_url)
+      .attr("height", "20%")
+      .attr("width", "20%");
+
+    $("#resultAddr1").text(yelpData.location.display_address[0]);
+    $("#resultAddr2").text(yelpData.location.display_address[1]);
+
+    $.post(
+      "/google",
+      {
+        key: ""
+      },
+      function(data) {
+        console.log("google key", data);
+        var googleKey = data.key;
 
         var maps =
           "https://www.google.com/maps/embed/v1/place?q=" +
-          data.name +
+          yelpData.name +
           "%20" +
-          data.location.address1 +
+          yelpData.location.display_address[0] +
           "&key=" +
           googleKey;
 
         fixMapsUrl(maps);
 
-        $("#resultAddr1").text(data.location.display_address[0]);
-        $("#resultAddr2").text(data.location.display_address[1]);
-
         $("#maps").attr("src", maps);
+      }
+    );
+  }
+
+  function setYelpData(lat, long, term) {
+    $.post(
+      "/yelp",
+      {
+        term: term,
+        latitude: lat,
+        longitude: long
+      },
+      function(data) {
+        yelpData = data;
+        console.log("yelpData", typeof yelpData, yelpData);
+        rerender(yelpData);
       }
     );
   }
