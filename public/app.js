@@ -49,26 +49,33 @@ $(function() {
     $("#resultAddr1").text(yelpData.location.display_address[0]);
     $("#resultAddr2").text(yelpData.location.display_address[1]);
 
-    $.get("/keys.json", function(data, status) {
-      var googleKey = data.googleKey;
+    $.post(
+      "/google",
+      {
+        key: ""
+      },
+      function(data) {
+        console.log("google key", data);
+        var googleKey = data.key;
 
-      var maps =
-        "https://www.google.com/maps/embed/v1/place?q=" +
-        yelpData.name +
-        "%20" +
-        yelpData.location.display_address[0] +
-        "&key=" +
-        googleKey;
+        var maps =
+          "https://www.google.com/maps/embed/v1/place?q=" +
+          yelpData.name +
+          "%20" +
+          yelpData.location.display_address[0] +
+          "&key=" +
+          googleKey;
 
-      fixMapsUrl(maps);
+        fixMapsUrl(maps);
 
-      $("#maps").attr("src", maps);
-    });
+        $("#maps").attr("src", maps);
+      }
+    );
   }
 
   function setYelpData(lat, long, term) {
     $.post(
-      "/params",
+      "/yelp",
       {
         term: term,
         latitude: lat,

@@ -18,18 +18,17 @@ app.use(
   })
 );
 
-/* if (process.env.local != false) {
+if (process.env.local) {
+} else {
   var keys = require("./public/keys.json");
-} */
-
-console.log(typeof process.env.local, process.env.local);
+}
 
 var yelpKey = process.env.yelpKey || keys.yelpKey; //replace with your api key
 var googleKey = process.env.googleKey || keys.googleKey;
 
 var client = yelp.client(yelpKey);
 
-app.post("/params", function(req, res) {
+app.post("/yelp", function(req, res) {
   var searchParams = {
     term: "",
     latitude: "",
@@ -48,6 +47,9 @@ app.post("/params", function(req, res) {
     });
 });
 
-app.post("/keys", function(req, res) {
-  res.sendFile("keys.json");
+app.post("/google", function(req, res) {
+  var key = {
+    key: googleKey
+  };
+  res.send(key);
 });
