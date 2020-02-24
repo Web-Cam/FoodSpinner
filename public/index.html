@@ -1,6 +1,8 @@
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
+   <link rel="stylesheet" href="pretty-checkbox.css">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Food spinner</title>
@@ -13,14 +15,35 @@
   </head>
 
   <body>
+
+    <div class="pretty p-image p-plain p-bigger">
+			<font size="6">
+
+        <input type="checkbox" />
+        <div class="state">
+            <img class="image" src="burger.png">
+            <label>Burgers</label>
+        </div>
+    </div>
+
+	    <div class="pretty p-image p-plain p-bigger ">
+		<font size="6">
+
+        <input type="checkbox" />
+        <div class="state">
+            <img class="image" src="taco.png">
+            <label>Tacos</label>
+        </div>
+    </div>
+	<p>
     <script src="app.js"></script>
-    <input type="text" id="search" placeholder="Restaurant Name" />
-    <button id="searchSubmit">Search</button>
+    <button id="searchSubmit">Random Search</button>
     <br />
-    <img src="" />
+    <img id="img2"></img>
     <h3 id="resultName"></h3>
     <p id="resultAddr1"></p>
     <p id="resultAddr2"></p>
+</p>
     <iframe
       width="500"
       height="400"
