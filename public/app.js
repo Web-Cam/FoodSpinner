@@ -22,6 +22,49 @@ $(function() {
       $(this).val("false");
     }
   });
+  
+    $("#steakCheck").click(function() {
+    if ($(this).val() === "false") {
+      $(this).val("steak");
+    } else if ($(this).val() === "steak") {
+      $(this).val("false");
+    }
+  });
+  
+    $("#breakfastCheck").click(function() {
+    if ($(this).val() === "false") {
+      $(this).val("breakfast");
+    } else if ($(this).val() === "breakfast") {
+      $(this).val("false");
+    }
+  });
+  
+  
+      $("#veganCheck").click(function() {
+    if ($(this).val() === "false") {
+      $(this).val("vegan");
+    } else if ($(this).val() === "vegan") {
+      $(this).val("false");
+    }
+  });
+       
+	   $("#pizzaCheck").click(function() {
+    if ($(this).val() === "false") {
+      $(this).val("pizza");
+    } else if ($(this).val() === "pizza") {
+      $(this).val("false");
+    }
+  });
+
+  
+  
+  	   $("#chineseCheck").click(function() {
+    if ($(this).val() === "false") {
+      $(this).val("chinese");
+    } else if ($(this).val() === "chinese") {
+      $(this).val("false");
+    }
+  });
 
   function handleSubmit(lat, long) {
     $("#searchSubmit").click(function() {
@@ -34,6 +77,21 @@ $(function() {
       }
       if ($("#tacoCheck").val() === "tacos") {
         categories.push($("#tacoCheck").val());
+      }
+	  if ($("#steakCheck").val() === "steak") {
+        categories.push($("#steakCheck").val());
+      }
+	  if ($("#breakfastCheck").val() === "breakfast") {
+        categories.push($("#breakfastCheck").val());
+      }
+	  if ($("#veganCheck").val() === "vegan") {
+        categories.push($("#veganCheck").val());
+      }
+	  if ($("#pizzaCheck").val() === "pizza") {
+        categories.push($("#pizzaCheck").val());
+      }
+	  if ($("#chineseCheck").val() === "chinese") {
+        categories.push($("#chineseCheck").val());
       }
       if (categories.length > 1) {
         randPickCat(categories);
