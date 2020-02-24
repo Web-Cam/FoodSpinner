@@ -41,7 +41,7 @@ $(function() {
   function rerender(yelpData) {
     $("#resultName").text(yelpData.name);
 
-    $("img")
+    $("#img2")
       .attr("src", yelpData.image_url)
       .attr("height", "20%")
       .attr("width", "20%");
@@ -49,12 +49,16 @@ $(function() {
     $("#resultAddr1").text(yelpData.location.display_address[0]);
     $("#resultAddr2").text(yelpData.location.display_address[1]);
 
+	
+	
+	$("#rating").text(yelpData.rating);
     $.post(
       "/google",
       {
         key: ""
       },
       function(data) {
+        console.log("google key", data);
         var googleKey = data.key;
 
         var maps =
@@ -82,7 +86,7 @@ $(function() {
       },
       function(data) {
         yelpData = data;
-        console.log("yelpData", yelpData);
+        console.log("yelpData", typeof yelpData, yelpData);
         rerender(yelpData);
       }
     );
@@ -94,6 +98,6 @@ function fixMapsUrl(maps) {
     maps = maps.replace(" ", "%20");
     fixMapsUrl(maps);
   } else if (maps.includes(" ") === false) {
-    console.log("maps api link", maps);
+    console.log(maps);
   }
 }
