@@ -23,24 +23,30 @@ if (process.env.local) {
   var keys = require("./public/keys.json");
 }
 
-var yelpKey = process.env.yelpKey || keys.yelpKey; //replace with your api key
+var yelpKey = process.env.yelpKey || keys.yelpKey;
 var googleKey = process.env.googleKey || keys.googleKey;
 
 var client = yelp.client(yelpKey);
 
 app.post("/yelp", function(req, res) {
   var searchParams = {
-    term: "",
+    categories: "",
     latitude: "",
-    longitude: ""
+    longitude: "",
+    radius: "20000",
+    limit: "50"
   };
-  searchParams.term = req.body.term;
+  searchParams.categories = req.body.categories;
   searchParams.latitude = req.body.latitude;
   searchParams.longitude = req.body.longitude;
+  console.log(searchParams);
   client
     .search(searchParams)
     .then(response => {
-      res.send(response.jsonBody.businesses[0]);
+      var pick = Math.floor(
+        Math.random() * response.jsonBody.businesses.length
+      );
+      res.send(response.jsonBody.businesses[pick]);
     })
     .catch(e => {
       console.log(e);

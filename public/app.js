@@ -7,35 +7,51 @@ $(function() {
     handleSubmit(lat, long);
   }
 
+  $("#burgerCheck").click(function() {
+    if ($(this).val() === "false") {
+      $(this).val("burgers");
+    } else if ($(this).val() === "burgers") {
+      $(this).val("false");
+    }
+  });
+
+  $("#tacoCheck").click(function() {
+    if ($(this).val() === "false") {
+      $(this).val("tacos");
+    } else if ($(this).val() === "tacos") {
+      $(this).val("false");
+    }
+  });
+
   function handleSubmit(lat, long) {
     $("#searchSubmit").click(function() {
-      if ($("#search").val() != "") {
-        var term = $("#search").val();
-        $("#search").val("");
+      console.clear();
 
-        setYelpData(lat, long, term);
+      var categories = [];
+
+      if ($("#burgerCheck").val() === "burgers") {
+        categories.push($("#burgerCheck").val());
+      }
+      if ($("#tacoCheck").val() === "tacos") {
+        categories.push($("#tacoCheck").val());
+      }
+      if (categories.length > 1) {
+        randPickCat(categories);
+      }
+
+      if (categories.length > 0) {
+        setYelpData(lat, long, categories);
       }
     });
+  }
 
-    $("#search").on({
-      keydown: function(event) {
-        if (event.which === 13 && $("#search").val() != "") {
-          var term = $("#search").val();
-          $("#search").val("");
+  function randPickCat(categories) {
+    console.log("more than one category, randomly choosing one...");
+    console.log("categories", categories);
 
-          setYelpData(lat, long, term);
-        }
-      },
-
-      keypress: function(event) {
-        if (event.which === 13 && $("#search").val() != "") {
-          var term = $("#search").val();
-          $("#search").val("");
-
-          setYelpData(lat, long, term);
-        }
-      }
-    });
+    var choosen = categories[Math.floor(Math.random() * categories.length)];
+    categories.length = 0;
+    categories.push(choosen);
   }
 
   function rerender(yelpData) {
@@ -49,16 +65,13 @@ $(function() {
     $("#resultAddr1").text(yelpData.location.display_address[0]);
     $("#resultAddr2").text(yelpData.location.display_address[1]);
 
-	
-	
-	$("#rating").text(yelpData.rating);
+    $("#rating").text(yelpData.rating);
     $.post(
       "/google",
       {
         key: ""
       },
       function(data) {
-      
         var googleKey = data.key;
 
         var maps =
@@ -76,17 +89,18 @@ $(function() {
     );
   }
 
-  function setYelpData(lat, long, term) {
+  function setYelpData(lat, long, categories) {
+    console.log("category: ", categories);
     $.post(
       "/yelp",
       {
-        term: term,
+        categories: categories,
         latitude: lat,
         longitude: long
       },
       function(data) {
         yelpData = data;
-        console.log("yelpData", yelpData);
+        console.log("yelpData: ", yelpData);
         rerender(yelpData);
       }
     );
@@ -98,6 +112,6 @@ function fixMapsUrl(maps) {
     maps = maps.replace(" ", "%20");
     fixMapsUrl(maps);
   } else if (maps.includes(" ") === false) {
-    console.log(maps);
+    console.log("google maps api url: ", maps);
   }
 }
