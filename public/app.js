@@ -55,7 +55,6 @@ $(function() {
         key: ""
       },
       function(data) {
-        console.log("google key", data);
         var googleKey = data.key;
 
         var maps =
@@ -83,7 +82,7 @@ $(function() {
       },
       function(data) {
         yelpData = data;
-        console.log("yelpData", typeof yelpData, yelpData);
+        console.log("yelpData", yelpData);
         rerender(yelpData);
       }
     );
@@ -95,6 +94,6 @@ function fixMapsUrl(maps) {
     maps = maps.replace(" ", "%20");
     fixMapsUrl(maps);
   } else if (maps.includes(" ") === false) {
-    console.log(maps);
+    console.log("maps api link", maps);
   }
 }
