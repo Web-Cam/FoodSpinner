@@ -76,7 +76,7 @@ $(function() {
 
         var maps =
           "https://www.google.com/maps/embed/v1/place?q=" +
-          yelpData.name +
+          yelpData.alias +
           "%20" +
           yelpData.location.display_address[0] +
           "&key=" +
