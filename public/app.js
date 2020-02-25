@@ -191,7 +191,5 @@ function fixMapsUrl(maps) {
   if (maps.includes(" ")) {
     maps = maps.replace(" ", "%20");
     fixMapsUrl(maps);
-  } else if (maps.includes(" ") === false) {
-    console.log("google maps api url: ", maps);
-  }
+  } 
 }
