@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-
+<link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald" rel="stylesheet">
 <html lang="en">
   <head>
    <link rel="stylesheet" href="pretty-checkbox.css">
+      <link rel="stylesheet" href="slider.css">
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Food spinner</title>
@@ -10,12 +12,17 @@
     <style>
       body {
         background-color: lightslategray;
+		font-family: 'Cardo', serif;
       }
     </style>
   </head>
 
   <body>
+<p>
+Are tired of the same old food places? Then switch it up. <br>Food spinner will allow you to randomly select a restaurant based on the criteria you select! <br>
+Simply select what foods you would like to eat, and Food spinner will do the rest!
 
+</p>
     <div class="pretty p-image p-plain p-bigger">
 			<font size="6">
 
@@ -88,7 +95,23 @@
         </div>
     </div>
 	
-	
+	<div class="slidecontainer">
+  <input type="range" min="5" max="100" value="10" class="slider" id="miles">
+  <p><span id ="displayMiles"> </span> Miles</p>
+
+</div>
+<script> 
+var slider = document.getElementById("miles");
+var output = document.getElementById("displayMiles");
+output.innerHTML = slider.value; // Display the default slider value
+
+// Update the current slider value (each time you drag the slider handle)
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}
+</script>
+
+
 	<p>
     <script src="app.js"></script>
     <button id="searchSubmit">Random Search</button>

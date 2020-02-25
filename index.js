@@ -9,7 +9,7 @@ app.listen(PORT, function() {
   console.log("listening on port", PORT);
 });
 
-app.use(express.static("public"));
+app.use(express.static(__dirname + "\\public"));
 app.use(bodyParser.json("keys.json"));
 
 app.use(
@@ -33,12 +33,14 @@ app.post("/yelp", function(req, res) {
     categories: "",
     latitude: "",
     longitude: "",
-    radius: "20000",
+    radius: "",
     limit: "50"
   };
   searchParams.categories = req.body.categories;
   searchParams.latitude = req.body.latitude;
   searchParams.longitude = req.body.longitude;
+  searchParams.radius = req.body.radius;
+
   console.log(searchParams);
   client
     .search(searchParams)

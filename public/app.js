@@ -148,13 +148,19 @@ $(function() {
   }
 
   function setYelpData(lat, long, categories) {
-    console.log("category: ", categories);
+    
+	radius = $("#displayMiles").text();
+	radius *= 1609;
+	console.log("category: ", categories);
+	console.log("radius: ", radius);
+
     $.post(
       "/yelp",
       {
         categories: categories,
         latitude: lat,
-        longitude: long
+        longitude: long,
+		radius:radius
       },
       function(data) {
         yelpData = data;
