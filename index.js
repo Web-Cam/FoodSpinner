@@ -9,7 +9,7 @@ app.listen(PORT, function() {
   console.log("listening on port", PORT);
 });
 
-app.use(express.static(__dirname + "\\public"));
+app.use(express.static("public"));
 app.use(bodyParser.json("keys.json"));
 
 app.use(
