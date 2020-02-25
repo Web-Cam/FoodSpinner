@@ -63,5 +63,5 @@ app.post("/google", function(req, res) {
 });
 
 app.get("/", function(req, res) {
-  res.sendfile("/index.html");
+  res.sendFile("./index.html");
 });
