@@ -9,7 +9,7 @@ app.listen(PORT, function() {
   console.log("listening on port", PORT);
 });
 
-app.use(express.static(__dirname + "\\public"));
+app.use(express.static("public"));
 app.use(bodyParser.json("keys.json"));
 
 app.use(
@@ -63,5 +63,5 @@ app.post("/google", function(req, res) {
 });
 
 app.get("/", function(req, res) {
-  res.sendfile(__dirname + "/index.html");
+  res.sendFile(__dirname + "/public/index.html");
 });
