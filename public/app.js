@@ -165,7 +165,23 @@ $(function() {
       function(data) {
         yelpData = data;
         console.log("yelpData: ", yelpData);
+		if (yelpData == "" ||yelpData == null ){
+	    
+		$("#resultName").text("No results for : " + categories +  " food try expanding radius?");
+		$("#img2")
+      .attr("src", yelpData.image_url)
+      .attr("height", "0%")
+      .attr("width", "0%");
+
+		$("#resultAddr1").empty();
+		$("#resultAddr2").empty();
+
+		$("#rating").empty();
+		 $("#maps").attr("src", "");
+		}
+		else{
         rerender(yelpData);
+		}
       }
     );
   }
